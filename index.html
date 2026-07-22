@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seoul Center × YouTube Creator — Báo Cáo Chiến Dịch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#241C25; --ink2:#3a2e3d;
+  --rose:#c8425f; --rose-dk:#a3324a; --rose-soft:#fbe9ec;
+  --gold:#b8862f; --gold-soft:#faf1de;
+  --green:#3c7a5c; --green-soft:#e8f3ee;
+  --bg:#faf6f3; --card:#ffffff; --line:#ece1dd; --line2:#e2d3cd;
+  --text:#241c25; --muted:#8d7c84; --muted2:#a6969c;
+  --radius:18px;
+  --shadow:0 1px 2px rgba(60,30,40,.04), 0 8px 24px rgba(60,30,40,.06);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 32px 60px}
+
+/* ===== HEADER ===== */
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid var(--line2)}
+.hero .eyebrow{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--rose-dk);margin-bottom:10px}
+.hero .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--rose)}
+.hero h1{font-size:30px;font-weight:600;margin:0 0 6px;color:var(--ink)}
+.hero .sub{color:var(--muted);font-size:13.5px;max-width:560px}
+.heroRight{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.pillRow{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{background:var(--card);border:1px solid var(--line2);border-radius:99px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--ink2);box-shadow:var(--shadow)}
+.pill b{color:var(--rose-dk)}
+.pill.phase{background:var(--gold-soft);border-color:#eddcae;color:#7a5a17}
+
+/* ===== KPI ===== */
+.kpiGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 18px 16px;position:relative;overflow:hidden}
+.kpi .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.kpi .val{font-family:"Fraunces",serif;font-size:25px;font-weight:600;color:var(--ink);margin:8px 0 4px}
+.kpi .sub{font-size:12px;color:var(--muted2)}
+.kpi .sub b{color:var(--green);font-weight:700}
+.kpi .sub.warn b{color:var(--rose-dk)}
+.kpi::after{content:"";position:absolute;right:-18px;top:-18px;width:70px;height:70px;border-radius:50%;background:var(--rose-soft);opacity:.6;z-index:0}
+.kpi.gold::after{background:var(--gold-soft)}
+.kpi.green::after{background:var(--green-soft)}
+.kpi>*{position:relative;z-index:1}
+
+/* ===== PHASE PROGRESS ===== */
+.section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:20px}
+.sectionHead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;flex-wrap:wrap;gap:6px}
+.sectionHead h2{font-size:16.5px;font-weight:600;margin:0;color:var(--ink)}
+.sectionHead span{font-size:12px;color:var(--muted)}
+
+.phaseBar{display:flex;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--line2);margin-bottom:10px}
+.phaseSeg{display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;position:relative}
+.phaseSeg.done{background:var(--green)}
+.phaseSeg.current{background:var(--rose)}
+.phaseSeg.todo{background:#e7dcd8;color:#8d7c84}
+.phaseLegend{display:flex;gap:22px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.phaseLegend b{color:var(--ink2)}
+
+/* ===== GRID 2 ===== */
+.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;margin-bottom:20px;align-items:stretch}
+@media(max-width:980px){.grid2{grid-template-columns:1fr}}
+
+/* creator table */
+table{width:100%;border-collapse:collapse;font-size:12.8px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line2)}
+td{padding:10px 10px;border-bottom:1px solid var(--line);color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.creatorName{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ink)}
+.rankBadge{width:20px;height:20px;border-radius:50%;background:var(--rose-soft);color:var(--rose-dk);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.rankBadge.top{background:var(--gold);color:#fff}
+.tagSvc{font-size:10.5px;color:var(--muted2)}
+
+/* chart */
+.chartBox{padding:6px 4px 0}
+.chartLegend{display:flex;gap:16px;font-size:11.5px;color:var(--muted);margin-bottom:6px}
+.chartLegend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+/* highlight cards */
+.highlightGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+@media(max-width:820px){.highlightGrid{grid-template-columns:1fr}}
+.hl{background:linear-gradient(160deg,var(--ink) 0%,var(--ink2) 100%);color:#f3e9eb;border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hl::after{content:"";position:absolute;right:-30px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:rgba(200,66,95,.25)}
+.hl .tag{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#e7b9c3;margin-bottom:10px;position:relative;z-index:1}
+.hl h3{font-size:21px;font-weight:600;margin:0 0 8px;position:relative;z-index:1;color:#fff}
+.hl p{font-size:12.6px;color:#d9c3c8;margin:0 0 14px;position:relative;z-index:1;max-width:420px}
+.hl .stats{display:flex;gap:22px;position:relative;z-index:1;flex-wrap:wrap}
+.hl .stat b{display:block;font-family:"Fraunces",serif;font-size:19px;color:#fff}
+.hl .stat span{font-size:10.8px;color:#c9a8ae;text-transform:uppercase;letter-spacing:.04em}
+
+/* detail table */
+.tableWrap{overflow-x:auto}
+.note{font-size:12px;color:var(--muted);border-top:1px dashed var(--line2);padding-top:14px;margin-top:16px;line-height:1.6}
+.note b{color:var(--ink2)}
+
+@media(max-width:900px){
+  .kpiGrid{grid-template-columns:repeat(2,1fr)}
+  .wrap{padding:20px 16px 40px}
+  .hero{align-items:flex-start}
+  .heroRight{align-items:flex-start}
+  .pillRow{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Google Ads · YouTube Shorts + Demand Gen</div>
+      <h1>Seoul Center — Creator Brand Deal</h1>
+      <div class="sub">Silver Package · Lead + Tối ưu CPA · Tăng khả năng hiển thị thương hiệu &amp; mức độ cân nhắc</div>
+    </div>
+    <div class="heroRight">
+      <div class="pillRow">
+        <div class="pill">Ngân sách kế hoạch: <b>323.700.000₫</b></div>
+        <div class="pill phase" id="phasePill">—</div>
+      </div>
+      <div class="pillRow"><div class="pill">Dữ liệu: <b id="dateRangeLbl">—</b></div></div>
+    </div>
+  </div>
+
+  <div class="kpiGrid" id="kpiGrid"></div>
+
+  <div class="section">
+    <div class="sectionHead">
+      <h2>Tiến độ theo giai đoạn (60 ngày)</h2>
+      <span id="phaseSub">—</span>
+    </div>
+    <div class="phaseBar" id="phaseBar"></div>
+    <div class="phaseLegend" id="phaseLegend"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Xếp hạng Creator</h2>
+        <span>Theo Lead → CPA thấp nhất → CTR</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead><tr>
+            <th>Creator</th><th class="num">Chi phí</th><th class="num">Hiển thị</th><th class="num">Lượt xem</th>
+            <th class="num">CTR</th><th class="num">Lead</th><th class="num">CPA</th>
+          </tr></thead>
+          <tbody id="creatorBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Xu hướng theo ngày</h2>
+        <span>Chi phí &amp; Lead</span>
+      </div>
+      <div class="chartLegend"><span><i style="background:var(--rose)"></i>Chi phí (₫)</span><span><i style="background:var(--gold)"></i>Lead</span></div>
+      <div class="chartBox" id="trendChart"></div>
+    </div>
+  </div>
+
+  <div class="highlightGrid">
+    <div class="hl" id="bestCreatorCard"></div>
+    <div class="hl" id="bestVideoCard"></div>
+  </div>
+
+  <div class="section">
+    <div class="sectionHead">
+      <h2>Chi tiết theo ngày</h2>
+      <span id="rowCountLbl">—</span>
+    </div>
+    <div class="tableWrap">
+      <table>
+        <thead><tr>
+          <th>Ngày</th><th>Creator</th><th>Dịch vụ</th>
+          <th class="num">Chi phí</th><th class="num">Hiển thị</th><th class="num">Lượt xem</th><th class="num">Click</th><th class="num">CTR</th><th class="num">Lead</th>
+        </tr></thead>
+        <tbody id="detailBody"></tbody>
+      </table>
+    </div>
+    <div class="note">
+      <b>Ghi chú số liệu:</b> "Tổng lượt xem" lấy theo cột <i>Số lượt xem công khai trên YouTube</i>; "Lead" lấy theo cột <i>Lượt chuyển đổi</i> ghi nhận trên Google Ads — hiện dự án <b>chưa tách riêng Lead Hotline / Lead Form / Lead Tawkto</b>, khi có nguồn dữ liệu 3 kênh này dashboard sẽ tách lại theo từng kênh. "Video hiệu quả nhất" đang lấy theo cấp <b>chiến dịch/creator</b> (mỗi creator hiện chạy 1 campaign) — khi có mã video/ad riêng theo từng creator, bảng sẽ tách chi tiết xuống cấp video.
+    </div>
+  </div>
+
+</div>
+
+<script>
+const ROWS = [{"ngay": "14/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 27320, "hien_thi": 1524, "xem": 1470, "click": 13, "lead": 0}, {"ngay": "14/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 994606, "hien_thi": 55191, "xem": 52431, "click": 752, "lead": 0}, {"ngay": "14/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 25224, "hien_thi": 830, "xem": 803, "click": 10, "lead": 0}, {"ngay": "14/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 39574, "hien_thi": 1517, "xem": 1458, "click": 12, "lead": 0}, {"ngay": "15/07/2026", "creator": "Hayun Huynh", "dich_vu": "NÁM DA LIỄU", "chi_phi": 0, "hien_thi": 0, "xem": 0, "click": 0, "lead": 0}, {"ngay": "15/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 2283951, "hien_thi": 19647, "xem": 19174, "click": 150, "lead": 0}, {"ngay": "15/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 2265069, "hien_thi": 18784, "xem": 18400, "click": 78, "lead": 0}, {"ngay": "15/07/2026", "creator": "VỢ CHỒNG NHÀ VỊT", "dich_vu": "REJURAN", "chi_phi": 290314, "hien_thi": 7729, "xem": 7368, "click": 86, "lead": 1}, {"ngay": "16/07/2026", "creator": "Hayun Huynh", "dich_vu": "NÁM DA LIỄU", "chi_phi": 0, "hien_thi": 0, "xem": 0, "click": 0, "lead": 0}, {"ngay": "16/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 1221343, "hien_thi": 30909, "xem": 29921, "click": 436, "lead": 0}, {"ngay": "16/07/2026", "creator": "VỢ CHỒNG NHÀ VỊT", "dich_vu": "REJURAN", "chi_phi": 2046862, "hien_thi": 43780, "xem": 42568, "click": 417, "lead": 1}, {"ngay": "16/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 1219079, "hien_thi": 46010, "xem": 44694, "click": 326, "lead": 1}, {"ngay": "17/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 494590, "hien_thi": 7513, "xem": 7321, "click": 98, "lead": 0}, {"ngay": "17/07/2026", "creator": "VỢ CHỒNG NHÀ VỊT", "dich_vu": "REJURAN", "chi_phi": 542809, "hien_thi": 18387, "xem": 17650, "click": 183, "lead": 0}, {"ngay": "17/07/2026", "creator": "Hayun Huynh", "dich_vu": "NÁM DA LIỄU", "chi_phi": 0, "hien_thi": 0, "xem": 0, "click": 0, "lead": 0}, {"ngay": "17/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 419445, "hien_thi": 13036, "xem": 12757, "click": 117, "lead": 0}, {"ngay": "20/07/2026", "creator": "VỢ CHỒNG NHÀ VỊT", "dich_vu": "REJURAN", "chi_phi": 474636, "hien_thi": 15326, "xem": 14750, "click": 167, "lead": 0}, {"ngay": "20/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 12876, "hien_thi": 664, "xem": 646, "click": 2, "lead": 0}, {"ngay": "20/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 28809, "hien_thi": 822, "xem": 783, "click": 6, "lead": 0}, {"ngay": "20/07/2026", "creator": "Hayun Huynh", "dich_vu": "NÁM DA LIỄU", "chi_phi": 47740, "hien_thi": 1251, "xem": 1209, "click": 18, "lead": 0}, {"ngay": "21/07/2026", "creator": "Good morning, Teddie", "dich_vu": "MỤN DA LIỄU", "chi_phi": 2260812, "hien_thi": 58027, "xem": 57222, "click": 257, "lead": 0}, {"ngay": "21/07/2026", "creator": "Hayun Huynh", "dich_vu": "NÁM DA LIỄU", "chi_phi": 2282543, "hien_thi": 18457, "xem": 18023, "click": 128, "lead": 0}, {"ngay": "21/07/2026", "creator": "VỢ CHỒNG NHÀ VỊT", "dich_vu": "REJURAN", "chi_phi": 2263313, "hien_thi": 58002, "xem": 55049, "click": 755, "lead": 1}, {"ngay": "21/07/2026", "creator": "TrucQuynh Junmi", "dich_vu": "TIÊM BAP", "chi_phi": 2265492, "hien_thi": 21379, "xem": 20869, "click": 250, "lead": 1}];
+
+const fmtVND = n => Math.round(n).toLocaleString('vi-VN') + '₫';
+const fmtNum = n => Math.round(n).toLocaleString('vi-VN');
+const fmtPct = n => (n*100).toLocaleString('vi-VN',{minimumFractionDigits:2,maximumFractionDigits:2}) + '%';
+
+// ---- date parsing dd/mm/yyyy ----
+function parseD(s){ const [d,m,y]=s.split('/').map(Number); return new Date(y,m-1,d); }
+ROWS.forEach(r=>r._d = parseD(r.ngay));
+ROWS.sort((a,b)=>a._d-b._d);
+
+// ---- totals ----
+const BUDGET_TOTAL = 323700000;
+const sum = k => ROWS.reduce((a,r)=>a+r[k],0);
+const totalCost = sum('chi_phi'), totalImpr = sum('hien_thi'), totalView = sum('xem'), totalClick = sum('click'), totalLead = sum('lead');
+const avgCTR = totalClick/totalImpr;
+const avgCPA = totalLead>0 ? totalCost/totalLead : null;
+const budgetUsedPct = totalCost/BUDGET_TOTAL;
+
+document.getElementById('dateRangeLbl').textContent =
+  ROWS[0].ngay + ' – ' + ROWS[ROWS.length-1].ngay;
+
+// ---- KPI cards ----
+const kpis = [
+  {lbl:'Tổng chi phí', val:fmtVND(totalCost), sub:`<b>${fmtPct(budgetUsedPct)}</b> ngân sách 323.7tr`, cls:''},
+  {lbl:'Tổng lượt hiển thị', val:fmtNum(totalImpr), sub:`CTR trung bình <b>${fmtPct(avgCTR)}</b>`, cls:''},
+  {lbl:'Tổng lượt xem', val:fmtNum(totalView), sub:`View rate <b>${fmtPct(totalView/totalImpr)}</b>`, cls:'green'},
+  {lbl:'Tổng Lead', val:fmtNum(totalLead), sub: avgCPA? `CPA trung bình <b>${fmtVND(avgCPA)}</b>` : 'Chưa phát sinh CPA', cls:'gold'},
+  {lbl:'Chi phí / Lượt xem', val:(totalCost/totalView).toLocaleString('vi-VN',{maximumFractionDigits:1})+'₫', sub:`${ROWS.length} dòng dữ liệu · ${new Set(ROWS.map(r=>r.creator)).size} creator`, cls:''},
+];
+document.getElementById('kpiGrid').innerHTML = kpis.map(k=>`
+  <div class="kpi ${k.cls}">
+    <div class="lbl">${k.lbl}</div>
+    <div class="val">${k.val}</div>
+    <div class="sub">${k.sub}</div>
+  </div>`).join('');
+
+// ---- Phase progress (Phase1 d1-14 / Phase2 d15-40 / Phase3 d41-60) ----
+// campaign start = 01/07/2026 (per plan)
+const campaignStart = new Date(2026,6,1);
+const lastDataDate = ROWS[ROWS.length-1]._d;
+const dayIndex = Math.round((lastDataDate - campaignStart)/86400000)+1; // ngày thứ mấy của campaign
+const phases = [
+  {name:'Phase 1 · Learning', from:1, to:14, budget:80000000, desc:'Test creator + hook + retention'},
+  {name:'Phase 2 · Scaling', from:15, to:40, budget:160000000, desc:'Scale Creator có chỉ số tốt'},
+  {name:'Phase 3 · Harvest', from:41, to:60, budget:83700000, desc:'Retargeting + tối ưu chuyển đổi'},
+];
+document.getElementById('phasePill').innerHTML = `Ngày <b>${dayIndex}</b> / 60`;
+document.getElementById('phaseSub').textContent = `Dữ liệu gần nhất: ${ROWS[ROWS.length-1].ngay} (ngày ${dayIndex} của chiến dịch)`;
+
+document.getElementById('phaseBar').innerHTML = phases.map(p=>{
+  const w = ((p.to-p.from+1)/60*100).toFixed(2);
+  let cls='todo';
+  if(dayIndex > p.to) cls='done'; else if(dayIndex>=p.from) cls='current';
+  return `<div class="phaseSeg ${cls}" style="width:${w}%">${p.name}</div>`;
+}).join('');
+document.getElementById('phaseLegend').innerHTML = phases.map(p=>
+  `<span><b>${p.name}</b> (Ngày ${p.from}-${p.to}) · ${fmtVND(p.budget)} · ${p.desc}</span>`
+).join('');
+
+// ---- Creator aggregation ----
+const byCreator = {};
+ROWS.forEach(r=>{
+  const c = byCreator[r.creator] || (byCreator[r.creator]={creator:r.creator,dich_vu:r.dich_vu,chi_phi:0,hien_thi:0,xem:0,click:0,lead:0});
+  c.chi_phi+=r.chi_phi; c.hien_thi+=r.hien_thi; c.xem+=r.xem; c.click+=r.click; c.lead+=r.lead;
+});
+const creatorArr = Object.values(byCreator).map(c=>({
+  ...c, ctr:c.click/c.hien_thi, cpa: c.lead>0? c.chi_phi/c.lead : Infinity
+}));
+creatorArr.sort((a,b)=> b.lead-a.lead || a.cpa-b.cpa || b.ctr-a.ctr);
+
+document.getElementById('creatorBody').innerHTML = creatorArr.map((c,i)=>`
+  <tr>
+    <td><div class="creatorName"><span class="rankBadge ${i===0?'top':''}">${i+1}</span>${c.creator}<span class="tagSvc">&nbsp;· ${c.dich_vu}</span></div></td>
+    <td class="num">${fmtVND(c.chi_phi)}</td>
+    <td class="num">${fmtNum(c.hien_thi)}</td>
+    <td class="num">${fmtNum(c.xem)}</td>
+    <td class="num">${fmtPct(c.ctr)}</td>
+    <td class="num">${c.lead}</td>
+    <td class="num">${isFinite(c.cpa)? fmtVND(c.cpa) : '—'}</td>
+  </tr>`).join('');
+
+// ---- Best creator / best video highlight ----
+const best = creatorArr[0];
+document.getElementById('bestCreatorCard').innerHTML = `
+  <div class="tag">Creator hiệu quả nhất</div>
+  <h3>${best.creator}</h3>
+  <p>Dẫn đầu về Lead (${best.lead}/${totalLead} tổng lead) với CPA thấp nhất trong nhóm đang chạy — dịch vụ ${best.dich_vu}.</p>
+  <div class="stats">
+    <div class="stat"><b>${best.lead}</b><span>Lead</span></div>
+    <div class="stat"><b>${isFinite(best.cpa)?fmtVND(best.cpa):'—'}</b><span>CPA</span></div>
+    <div class="stat"><b>${fmtPct(best.ctr)}</b><span>CTR</span></div>
+    <div class="stat"><b>${fmtVND(best.chi_phi)}</b><span>Chi phí</span></div>
+  </div>`;
+
+// best single day/campaign row (impressions>500 to avoid noise) ranked by CTR then lead
+const candidateRows = ROWS.filter(r=>r.hien_thi>500).map(r=>({...r, ctr:r.click/r.hien_thi}));
+candidateRows.sort((a,b)=> b.lead-a.lead || b.ctr-a.ctr);
+const bestRow = candidateRows[0];
+document.getElementById('bestVideoCard').innerHTML = `
+  <div class="tag">Video / Chiến dịch hiệu quả nhất</div>
+  <h3>${bestRow.creator}</h3>
+  <p>Ngày chạy tốt nhất: ${bestRow.ngay} — ${bestRow.dich_vu}. CTR &amp; lead vượt trội so với các ngày còn lại trong cùng campaign.</p>
+  <div class="stats">
+    <div class="stat"><b>${bestRow.ngay}</b><span>Ngày</span></div>
+    <div class="stat"><b>${fmtPct(bestRow.ctr)}</b><span>CTR</span></div>
+    <div class="stat"><b>${bestRow.lead}</b><span>Lead</span></div>
+    <div class="stat"><b>${fmtVND(bestRow.chi_phi)}</b><span>Chi phí</span></div>
+  </div>`;
+
+// ---- Daily trend chart (custom SVG, cost bars + lead line) ----
+const byDate = {};
+ROWS.forEach(r=>{
+  const d = byDate[r.ngay] || (byDate[r.ngay]={ngay:r.ngay,_d:r._d,chi_phi:0,lead:0});
+  d.chi_phi+=r.chi_phi; d.lead+=r.lead;
+});
+const dailyArr = Object.values(byDate).sort((a,b)=>a._d-b._d);
+
+(function drawChart(){
+  const W=460,H=200,padL=8,padR=8,padT=10,padB=26;
+  const n=dailyArr.length;
+  const bw = (W-padL-padR)/n;
+  const maxCost = Math.max(...dailyArr.map(d=>d.chi_phi))*1.15 || 1;
+  const maxLead = Math.max(...dailyArr.map(d=>d.lead),1)*1.3;
+
+  let bars='', labels='', linePts=[], dots='';
+  dailyArr.forEach((d,i)=>{
+    const x = padL + i*bw + bw*0.18;
+    const bh = (d.chi_phi/maxCost)*(H-padT-padB);
+    const y = H-padB-bh;
+    bars += `<rect x="${x}" y="${y}" width="${bw*0.64}" height="${bh}" rx="4" fill="var(--rose)" opacity="0.85"/>`;
+    labels += `<text x="${padL+i*bw+bw/2}" y="${H-8}" font-size="9.5" fill="var(--muted2)" text-anchor="middle">${d.ngay}</text>`;
+    const ly = H-padB-(d.lead/maxLead)*(H-padT-padB);
+    linePts.push(`${padL+i*bw+bw/2},${ly}`);
+    dots += `<circle cx="${padL+i*bw+bw/2}" cy="${ly}" r="3.4" fill="var(--gold)"/>`;
+  });
+  const svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:Inter,sans-serif">
+    <line x1="${padL}" y1="${H-padB}" x2="${W-padR}" y2="${H-padB}" stroke="var(--line2)"/>
+    ${bars}
+    <polyline points="${linePts.join(' ')}" fill="none" stroke="var(--gold)" stroke-width="2"/>
+    ${dots}
+    ${labels}
+  </svg>`;
+  document.getElementById('trendChart').innerHTML = svg;
+})();
+
+// ---- Detail table ----
+document.getElementById('rowCountLbl').textContent = `${ROWS.length} dòng · ${ROWS[0].ngay} → ${ROWS[ROWS.length-1].ngay}`;
+document.getElementById('detailBody').innerHTML = ROWS.map(r=>`
+  <tr>
+    <td>${r.ngay}</td><td>${r.creator}</td><td class="tagSvc">${r.dich_vu}</td>
+    <td class="num">${fmtVND(r.chi_phi)}</td>
+    <td class="num">${fmtNum(r.hien_thi)}</td>
+    <td class="num">${fmtNum(r.xem)}</td>
+    <td class="num">${fmtNum(r.click)}</td>
+    <td class="num">${r.hien_thi>0?fmtPct(r.click/r.hien_thi):'—'}</td>
+    <td class="num">${r.lead}</td>
+  </tr>`).join('');
+</script>
+</body>
+</html>
